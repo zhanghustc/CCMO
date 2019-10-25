@@ -8,7 +8,7 @@
 
 This R package implements a novel statistical method for detecting disease-associated SNPs using genotype data from case-control mother-offspring pairs, and each case or control has additional covariate data from his/her mother. The novel statistical method is documented in the following manuscript:
 
-_Zhang H, Mukherjee B, Arthur V, Hochner H, Chen J. An Efficient and Computationally Robust Statistical Method for Analyzing Case-Control Mother-Offspring Pair Genetic Association Studies. Accepted by Annals of Applied Statistics._
+_Zhang H, Mukherjee B, Arthur V, Hu G, Hochner H, Chen J. An Efficient and Computationally Robust Statistical Method for Analyzing Case-Control Mother-Offspring Pair Genetic Association Studies. Accepted by Annals of Applied Statistics._
 
 ## Other related materials
 
