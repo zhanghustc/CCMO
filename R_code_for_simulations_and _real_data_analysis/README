@@ -1,0 +1,51 @@
+##############################################
+# 1. Shell scripts for simulation studies
+##############################################
+
+# DEP versus DEP-CLH (Tables 3 and S1)
+cd scripts
+./batch.chen.sh
+R CMD BATCH summary-chen.R
+
+# DEP, IND, LOGIT (Tables 4-5, S2-S6)
+./batch.sh
+R CMD BATCH summary.R
+
+# small MAF (Tale S7)
+./batch-0.1.sh
+R CMD BATCH summary-0.1.R
+
+# small sample size (Table S8)
+./batch-200.sh
+R CMD BATCH summary-200.R
+
+# DEP vs. EMIM (Table S9)
+./batch.emim-files.sh
+./batch.emim-new.sh
+./batch.emim-emim.sh
+R CMD BATCH summary-emim-all.R
+
+# sensitivity analysis for HWE (Tables 6 and S10)
+./batch.hwe.sh
+R CMD BATCH summary-hwe.R
+
+# sensitivity analysis for disease prevalence (Table S11)
+./batch.hwe.sh
+R CMD BATCH summary-hwe.R
+
+# sensitivity analysis for mode of inheritance (Table S12)
+./batch.hwe.sh
+R CMD BATCH summary-hwe.R
+
+##############################################
+# 2. Shell scripts for real data analyses
+##############################################
+
+# (Figure 1, Tables 7 and S13-S17)
+
+cd ../scripts-Jerusalem
+R CMD BATCH main-real.R
+../emim/EMIM.sh
+
+R CMD BATCH summary-real-emim.R
+R CMD BATCH summary-real.R

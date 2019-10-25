@@ -1,0 +1,17 @@
+Package: CCMO
+Type: Package
+Title: Case-Control Mother-Offspring Pair Genetic Association Studies
+Version: 0.1.0
+Date: 2019-10-10
+Author: Hong Zhang
+Maintainer: Hong Zhang <zhangh@ustc.edu.cn>
+Description: This package implements a statistical method for detecting SNPs associated with offspring disease using the genotype data from mother-offspring pairs by incorporting maternal covariates.
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+Imports: aod, MASS, nloptr, numDeriv, foreach, doMC
+RoxygenNote: 6.1.1
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+URL: http://github.com/zhanghustc/CCMO
+BugReports: http://github.com/zhanghustc/CCMO/issues

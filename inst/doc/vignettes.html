@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Hong Zhang" />
+
+
+<title>Introduction to CCMO</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to CCMO</h1>
+<h4 class="author"><em>Hong Zhang</em></h4>
+<h4 class="date"><em>2019/1/7</em></h4>
+
+
+
+<div id="method-description" class="section level1">
+<h1>Method description</h1>
+<p>The R package <strong>CCMO</strong> implements a powerful statistical method for disease-gene association analysis using case-control mother-offspring data. The data for each mother-offspring pair are <span class="math inline">\((D,G^c,G^m,X)\)</span>, where <span class="math inline">\(D\)</span> is the disease status of the offspring (should be coded as 1 for case and 0 for control), <span class="math inline">\(G^c\)</span> and <span class="math inline">\(G^m\)</span> are the genotypes of offspring and mother, and <span class="math inline">\(X\)</span> is a <span class="math inline">\(p\)</span>-vector of maternal covariates.</p>
+Suppose a SNP has two alleles A and B (B is the minor allele), then genotypes can be coded either as 0 (for genotype AA), 1 (for genotype AB), or 2 (for genotype BB). Alternatively, the genotypes can be normalized according to specified mode of inheritance
+
+<p>In what follows, we adopt the normalized genotypes.</p>
+The method assumes that the offspring genotype is conditional independent of the maternal covariates given maternal covariates. The penetrance model is as follows:
+<span class="math display">\[\begin{eqnarray*}
+&amp;&amp;\mbox{pr}(D=1|G^o,G^m,X)\\
+&amp;=&amp;\mbox{expit}(\beta_0+\beta_{G^c}G^c+\beta_{G^m}G^m+\beta_oX_o+\beta_{G^cX}G^cX_c+\beta_{G^mX}G^mX_m+\beta_{G^cG^m}G^cG^m),
+\end{eqnarray*}\]</span>
+<p>where expit<span class="math inline">\((t)=e^t/(1+e^t)\)</span>, <span class="math inline">\(X_o\)</span>, <span class="math inline">\(X_c\)</span>, and <span class="math inline">\(X_m\)</span> are functions of the covariates <span class="math inline">\(X\)</span>, <span class="math inline">\(\beta_{G^c}\)</span> and <span class="math inline">\(\beta_{G^m}\)</span> are main genetic effects for offspring (child) and mother, respectively, <span class="math inline">\(\beta_o\)</span> is the main maternal environmental effect, <span class="math inline">\(\beta_{G^cX}\)</span> is the offspring gene-environment interaction effct, <span class="math inline">\(\beta_{G^mX}\)</span> is the maternal gene-environment interaction effect, and <span class="math inline">\(\beta_{G^cG^m}\)</span> is the gene-gene interaction effect. The maternal genotype is associated with the maternal covariates through the following double additive logit (daLOG) model: <span class="math display">\[\mbox{pr}(G^m=1|X)=\frac{\xi(\theta,F)e^{k\eta'X_{G^m}}}{\sum_l\xi_l(\theta,F)e^{l\eta'X_{G^m}}},\]</span> where <span class="math inline">\(\eta\)</span> is a regression parameter vector, <span class="math inline">\(X_{G^m}\)</span> is a function of <span class="math inline">\(X\)</span>, <span class="math inline">\(\xi_k(\theta,F)\)</span> is the probability of <span class="math inline">\(G^m=k\)</span> with <span class="math inline">\(\theta\)</span> being the minor allele frequency and <span class="math inline">\(F\)</span> being the inbreeding coefficient.</p>
+The usage of the functions <em>singleSNP</em> and <em>multipleSNP</em> are as follows:
+
+<p>Users should specify <span class="math inline">\(X_c\)</span>, <span class="math inline">\(X_m\)</span>, <span class="math inline">\(X_o\)</span>, <span class="math inline">\(X_{G^m}\)</span> according to their requirements, each of them can be omitted in the model by setting it to be the default value <em>NULL</em>. Each of the two main genetic effects can be included in the penetrance model by specifying <em>G.main</em>, and the gene-gene interaction effect can be included by setting <em>G.int</em> to be <em>TRUE</em>.</p>
+<p>The mode of inheritance can be specified through <em>mode</em> (‘rec’ for recessive, ‘add’ for additive, ‘dom’ for dominant). Hardy-Weiberg equilibrium can be incorporated in the method through <em>HWE</em>. The independence of <span class="math inline">\(G^m\)</span> and <span class="math inline">\(X\)</span> can be incorprated by setting <em>ind</em> to be <em>TRUE</em>.</p>
+</div>
+<div id="illustration-of-singlesnp" class="section level1">
+<h1>Illustration of <em>singleSNP</em></h1>
+<p>We use the dataset contained in the R package for illustration.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(CCMO)
+<span class="kw">data</span>(<span class="st">&quot;SampleData&quot;</span>,<span class="dt">package=</span><span class="st">&quot;CCMO&quot;</span>)
+<span class="kw">dim</span>(SampleData)</code></pre></div>
+<pre><code>## [1] 2000   23</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(SampleData)</code></pre></div>
+<pre><code>##      Outcome Gc1 Gc2 Gc3 Gc4 Gc5 Gc6 Gc7 Gc8 Gc9 Gc10 Gm1 Gm2 Gm3 Gm4 Gm5
+## [1,]       0   0   0   0   1   0   1   0   0   0    1   0   1   0   0   0
+## [2,]       0   1   0   1   1   0   1   1   1   2    0   0   0   1   1   0
+## [3,]       0   1   0   0   1   0   0   1   0   0    0   1   0   0   1   0
+## [4,]       0   0   1   0   1   1   1   0   0   1    0   0   2   1   0   1
+## [5,]       0   0   2   0   1   1   0   0   0   0    1   0   1   1   1   1
+## [6,]       0   1   0   0   0   0   0   0   1   1    0   2   0   0   0   0
+##      Gm6 Gm7 Gm8 Gm9 Gm10  con.covar dis.covar
+## [1,]   1   1   0   1    1 -0.1031417         1
+## [2,]   2   1   0   1    0 -0.2261724         0
+## [3,]   0   1   0   0    0  1.8362106         0
+## [4,]   0   1   0   0    1 -1.3050791         0
+## [5,]   1   0   0   0    1  0.1702559         1
+## [6,]   0   0   1   1    0  1.6989293         1</code></pre>
+<p>This dataset has maternal and offspring genotypes for 10 SNPs and two maternal covariates from 2000 mother-offspring pairs. Here we analyze the first SNP. Suppose we are interested in two main genetic effects, maternal gene-environment interaction effects, and offspring gene-environment interaction effects. The R code for analyzing the data is as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(CCMO)
+Y =<span class="st"> </span>SampleData[,<span class="dv">1</span>]
+Gc =<span class="st"> </span>SampleData[,<span class="dv">2</span>]
+Gm =<span class="st"> </span>SampleData[,<span class="dv">12</span>]
+X =<span class="st"> </span>SampleData[,<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">21</span>)]
+fit =<span class="st"> </span><span class="kw">singleSNP</span>(Y,Gc,Gm,<span class="dt">Xo=</span>X,<span class="dt">Xc=</span>X,<span class="dt">Xm=</span>X,<span class="dt">X.Gm=</span>X)</code></pre></div>
+<p>The result is a list containing the following elements:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(fit)</code></pre></div>
+<pre><code>## [1] &quot;new&quot;        &quot;log&quot;        &quot;cov.new&quot;    &quot;cov.log&quot;    &quot;HWE&quot;       
+## [6] &quot;IND&quot;        &quot;penetrance&quot; &quot;daLOG&quot;</code></pre>
+<p>The estimation and significance test results produced by the new method are</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>new</code></pre></div>
+<pre><code>##                    est         se      z.score      p.value
+## theta      0.195841850 0.01933770           NA           NA
+## Intercept -4.994375983 0.09886673 -50.51624635 0.000000e+00
+## Gc         0.145105588 0.17694879   0.82004283 4.121917e-01
+## Gm         0.606591709 0.18116275   3.34832477 8.130168e-04
+## Xo1        0.430749936 0.06997466   6.15579870 7.470006e-10
+## Xo2        0.597944272 0.13557749   4.41035058 1.032034e-05
+## Gc:Xc1    -0.148614841 0.08293936  -1.79184939 7.315709e-02
+## Gc:Xc2     0.005947029 0.17946499   0.03313755 9.735649e-01
+## Gm:Xm1    -0.457341996 0.16544129  -2.76437645 5.703170e-03
+## Gm:Xm2    -0.798695005 0.32715931  -2.44130301 1.463437e-02
+## Gm~Z1      1.149328806 0.13025894   8.82341608 0.000000e+00
+## Gm~Z2      1.184683406 0.24634657   4.80901114 1.516788e-06</code></pre>
+<p>The variance-covariance matrix of the estimates by the new method is stored in</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>cov.new</code></pre></div>
+<p>The corresponding results by the standard logistic regression are included for comparison</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>log
+fit<span class="op">$</span>cov.log</code></pre></div>
+</div>
+<div id="illustration-of-omnibustest" class="section level1">
+<h1>Illustration of <em>OmnibusTest</em></h1>
+<p>Multiple effects can be simultineously tested using the function <em>OmnibusTest</em>. Suppose we want to test four gene-environment interaction effects simultineously, then we should specify the indices of the two interaction effects when call <em>OmnibusTest</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit =<span class="st"> </span><span class="kw">OmnibusTest</span>(fit,<span class="dt">test=</span><span class="dv">7</span><span class="op">:</span><span class="dv">10</span>)
+fit<span class="op">$</span>Omnibus</code></pre></div>
+<pre><code>##         stat df      p.value
+## new 20.20931  4 0.0004540558
+## log 17.54536  4 0.0015138656</code></pre>
+<p>The results include the Wald test statistic, degrees of freedom, and p-value for each of two methods (i.e., <em>new</em> and <em>log</em>).</p>
+</div>
+<div id="illustration-of-multiplesnp" class="section level1">
+<h1>Illustration of <em>multipleSNP</em></h1>
+<p>Suppose we want to analyze the 10 SNPs simultaneously. The function <em>multipleSNP</em> calls multiple CPU cores to save computational time, as shown below</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Gc =<span class="st"> </span>SampleData[,<span class="dv">2</span><span class="op">:</span><span class="dv">11</span>]
+Gm =<span class="st"> </span>SampleData[,<span class="dv">12</span><span class="op">:</span><span class="dv">21</span>]
+<span class="kw">system.time</span>(fit1 &lt;-<span class="st"> </span><span class="kw">multipleSNP</span>(Y,Gc,Gm,<span class="dt">Xo=</span>X,<span class="dt">Xc=</span>X,<span class="dt">Xm=</span>X,<span class="dt">X.Gm=</span>X,<span class="dt">cores=</span><span class="dv">1</span>))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##  13.306   1.351  14.723</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(fit2 &lt;-<span class="st"> </span><span class="kw">multipleSNP</span>(Y,Gc,Gm,<span class="dt">Xo=</span>X,<span class="dt">Xc=</span>X,<span class="dt">Xm=</span>X,<span class="dt">X.Gm=</span>X,<span class="dt">cores=</span><span class="dv">2</span>))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   6.854   0.670   7.860</code></pre>
+<p>Of course, the saved computational time depends on the number of CPU cores. The output is a list of length 10 (the number of SNPs). For example, the results of the 2nd SNP can be assessed through</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit2[[<span class="dv">2</span>]]</code></pre></div>
+<p>Omnibus test can be carried out by specifying the target variable indices through <em>test</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">multipleSNP</span>(Y,Gc,Gm,<span class="dt">Xo=</span>X,<span class="dt">Xc=</span>X,<span class="dt">Xm=</span>X,<span class="dt">X.Gm=</span>X,<span class="dt">test=</span><span class="dv">7</span><span class="op">:</span><span class="dv">10</span>)
+fit[[<span class="dv">2</span>]]<span class="op">$</span>Omnibus</code></pre></div>
+<pre><code>##         stat df    p.value
+## new 8.816196  4 0.06586153
+## log 1.716856  4 0.78765342</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
